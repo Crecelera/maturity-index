@@ -1,0 +1,681 @@
+import { useState } from "react";
+
+const MAKE_WEBHOOK_URL = "https://hook.make.com/TU_WEBHOOK_AQUI"; // Reemplazar en Make.com
+
+const QUESTIONS = [
+  {
+    id: 1,
+    dimension: "Estrategia",
+    question: "¿Tenés claro quién es tu cliente ideal y ese criterio guía las decisiones comerciales de tu equipo?",
+    options: [
+      { text: "No está definido formalmente", score: 1 },
+      { text: "Está definido pero no siempre se aplica", score: 2 },
+      { text: "Está claro y guía todas las decisiones comerciales", score: 3 },
+    ],
+  },
+  {
+    id: 2,
+    dimension: "Estrategia",
+    question: "¿Sabés con certeza por qué ganás deals y por qué los perdés?",
+    options: [
+      { text: "No lo analizamos", score: 1 },
+      { text: "Tenemos intuición pero no datos", score: 2 },
+      { text: "Lo medimos y documentamos sistemáticamente", score: 3 },
+    ],
+  },
+  {
+    id: 3,
+    dimension: "Prospecting",
+    question: "¿Cómo llegan la mayoría de tus nuevas oportunidades de negocio?",
+    options: [
+      { text: "Los clientes me buscan o llegan por referidos — no tenemos prospección activa", score: 1 },
+      { text: "Mezcla entre inbound y algo de prospección del equipo", score: 2 },
+      { text: "El equipo prospecta activamente con un proceso definido", score: 3 },
+    ],
+  },
+  {
+    id: 4,
+    dimension: "Prospecting",
+    question: "Cuando necesitás cerrar más negocio, ¿qué hace tu equipo?",
+    options: [
+      { text: "Improvisamos — llamamos a conocidos, activamos contactos viejos", score: 1 },
+      { text: "Tenemos algunas acciones pero sin un proceso claro", score: 2 },
+      { text: "Ejecutamos un playbook definido de generación de oportunidades", score: 3 },
+    ],
+  },
+  {
+    id: 5,
+    dimension: "Proceso",
+    question: "¿Tu equipo sigue un proceso comercial claro con etapas definidas, o cada vendedor hace lo suyo?",
+    options: [
+      { text: "Cada uno trabaja a su manera", score: 1 },
+      { text: "Hay algo definido pero no se respeta siempre", score: 2 },
+      { text: "Hay un proceso claro que todos siguen", score: 3 },
+    ],
+  },
+  {
+    id: 6,
+    dimension: "Proceso",
+    question: "¿Cómo manejás el seguimiento de oportunidades abiertas?",
+    options: [
+      { text: "Es reactivo — seguimos cuando el cliente aparece", score: 1 },
+      { text: "Hay intención pero sin disciplina clara", score: 2 },
+      { text: "Hay una cadencia definida y se cumple", score: 3 },
+    ],
+  },
+  {
+    id: 7,
+    dimension: "Equipo",
+    question: "¿Tenés un líder comercial que sea dueño del resultado de ventas, independientemente de vos?",
+    options: [
+      { text: "No, ese rol lo ocupo yo", score: 1 },
+      { text: "Hay alguien pero sin autoridad o foco real", score: 2 },
+      { text: "Sí, hay un líder claro con ownership del resultado", score: 3 },
+    ],
+  },
+  {
+    id: 8,
+    dimension: "Equipo",
+    question: "¿Los resultados de ventas dependen de personas específicas o el equipo rinde de forma consistente?",
+    options: [
+      { text: "Dependen mucho de 1–2 personas clave", score: 1 },
+      { text: "Hay variabilidad importante entre vendedores", score: 2 },
+      { text: "El equipo rinde de forma bastante consistente", score: 3 },
+    ],
+  },
+  {
+    id: 9,
+    dimension: "Gobernanza",
+    question: "¿Podés decir con confianza cuánto vas a cerrar este trimestre?",
+    options: [
+      { text: "No, el forecast no es confiable", score: 1 },
+      { text: "Tenemos estimaciones pero con poca precisión", score: 2 },
+      { text: "Sí, tenemos forecast formal con buena precisión histórica", score: 3 },
+    ],
+  },
+  {
+    id: 10,
+    dimension: "Gobernanza",
+    question: "¿Dónde vive la información de tus clientes y oportunidades activas?",
+    options: [
+      { text: "En la cabeza de cada vendedor o en WhatsApp", score: 1 },
+      { text: "En una hoja de Excel o Google Sheets", score: 2 },
+      { text: "En un CRM que el equipo usa de forma consistente", score: 3 },
+    ],
+  },
+];
+
+const REVENUE_OPTIONS = [
+  "Menos de USD 500k",
+  "USD 500k – 1M",
+  "USD 1M – 5M",
+  "USD 5M – 10M",
+  "Más de USD 10M",
+];
+
+function getResult(score) {
+  if (score >= 24) return {
+    level: "Sistema Maduro",
+    emoji: "🟢",
+    color: "#CCFF66",
+    textColor: "#1A1A1A",
+    description: "Tu sistema comercial tiene una base sólida. Hay oportunidades claras de optimización y escalabilidad para llevar el negocio al siguiente nivel.",
+    cta: "Agendemos una conversación para identificar dónde está tu mayor oportunidad de crecimiento.",
+  };
+  if (score >= 15) return {
+    level: "Sistema en Construcción",
+    emoji: "🟡",
+    color: "#F5C842",
+    textColor: "#1A1A1A",
+    description: "Tenés estructura parcial pero hay brechas claras que están frenando el crecimiento. Este es exactamente el momento de actuar antes de que escalar amplifique los problemas.",
+    cta: "Agendemos un Sales Reality Check completo para mapear exactamente qué está frenando tu crecimiento.",
+  };
+  return {
+    level: "Operando Sin Sistema",
+    emoji: "🔴",
+    color: "#FF5C5C",
+    textColor: "#FFFFFF",
+    description: "El crecimiento depende de personas, no de arquitectura. Cada nuevo vendedor que sumás amplifica la improvisación. Es urgente construir el sistema antes de seguir escalando.",
+    cta: "Agendemos una llamada esta semana — el costo de no actuar es más alto de lo que parece.",
+  };
+}
+
+export default function App() {
+  const [phase, setPhase] = useState("intro"); // intro | quiz | form | result
+  const [current, setCurrent] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [form, setForm] = useState({ nombre: "", email: "", whatsapp: "", empresa: "", cargo: "", facturacion: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const totalScore = answers.reduce((a, b) => a + b.score, 0);
+  const result = getResult(totalScore);
+  const progress = ((current) / QUESTIONS.length) * 100;
+
+  function handleOptionClick(option) {
+    setSelected(option);
+  }
+
+  function handleNext() {
+    if (!selected) return;
+    const newAnswers = [...answers, { question: QUESTIONS[current].question, answer: selected.text, score: selected.score }];
+    setAnswers(newAnswers);
+    setSelected(null);
+    if (current + 1 < QUESTIONS.length) {
+      setCurrent(current + 1);
+    } else {
+      setPhase("form");
+    }
+  }
+
+  async function handleSubmit() {
+    if (!form.nombre || !form.email || !form.whatsapp || !form.empresa || !form.facturacion) {
+      setError("Por favor completá todos los campos obligatorios.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    try {
+      await fetch(MAKE_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        body: JSON.stringify({
+          fecha: new Date().toISOString(),
+          nombre: form.nombre,
+          email: form.email,
+          whatsapp: form.whatsapp,
+          empresa: form.empresa,
+          cargo: form.cargo,
+          facturacion: form.facturacion,
+          score_total: totalScore,
+          nivel_madurez: result.level,
+          respuestas: answers.map((a, i) => ({ pregunta: i + 1, respuesta: a.answer, puntaje: a.score })),
+        }),
+      });
+    } catch (e) {
+      // no-cors won't throw, continue
+    }
+    setLoading(false);
+    setPhase("result");
+  }
+
+  return (
+    <div style={styles.root}>
+      <div style={styles.container}>
+
+        {/* INTRO */}
+        {phase === "intro" && (
+          <div style={styles.card}>
+            <div style={styles.badge}>CRECELERA</div>
+            <h1 style={styles.bigTitle}>¿Qué tan maduro es tu sistema comercial?</h1>
+            <p style={styles.subtitle}>10 preguntas · 5 minutos · Resultado inmediato</p>
+            <div style={styles.divider} />
+            <p style={styles.body}>
+              La mayoría de las empresas B2B en LATAM crecen con esfuerzo, no con arquitectura. Este quiz mide la madurez real de tu sistema comercial y te dice exactamente dónde están las brechas.
+            </p>
+            <div style={styles.tagsRow}>
+              {["Estrategia", "Prospecting", "Proceso", "Equipo", "Gobernanza"].map(t => (
+                <span key={t} style={styles.tag}>{t}</span>
+              ))}
+            </div>
+            <button style={styles.btnPrimary} onClick={() => setPhase("quiz")}>
+              Empezar el diagnóstico →
+            </button>
+          </div>
+        )}
+
+        {/* QUIZ */}
+        {phase === "quiz" && (
+          <div style={styles.card}>
+            <div style={styles.progressBar}>
+              <div style={{ ...styles.progressFill, width: `${progress}%` }} />
+            </div>
+            <div style={styles.progressLabel}>
+              <span style={styles.dimLabel}>{QUESTIONS[current].dimension}</span>
+              <span style={styles.counterLabel}>{current + 1} / {QUESTIONS.length}</span>
+            </div>
+            <h2 style={styles.questionText}>{QUESTIONS[current].question}</h2>
+            <div style={styles.optionsCol}>
+              {QUESTIONS[current].options.map((opt, i) => (
+                <button
+                  key={i}
+                  style={{
+                    ...styles.optionBtn,
+                    ...(selected === opt ? styles.optionSelected : {}),
+                  }}
+                  onClick={() => handleOptionClick(opt)}
+                >
+                  <span style={selected === opt ? styles.optionDotSelected : styles.optionDot} />
+                  {opt.text}
+                </button>
+              ))}
+            </div>
+            <button
+              style={{ ...styles.btnPrimary, opacity: selected ? 1 : 0.4, cursor: selected ? "pointer" : "not-allowed" }}
+              onClick={handleNext}
+              disabled={!selected}
+            >
+              {current + 1 === QUESTIONS.length ? "Ver mi resultado →" : "Siguiente →"}
+            </button>
+          </div>
+        )}
+
+        {/* FORM */}
+        {phase === "form" && (
+          <div style={styles.card}>
+            <div style={styles.badge}>CASI LISTO</div>
+            <h2 style={styles.formTitle}>Completaste el diagnóstico</h2>
+            <p style={styles.body}>Dejanos tus datos para enviarte el resultado detallado y ver cómo podemos ayudarte.</p>
+            <div style={styles.formGrid}>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Nombre *</label>
+                <input style={styles.input} placeholder="Tu nombre" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Email *</label>
+                <input style={styles.input} placeholder="tu@empresa.com" type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>WhatsApp *</label>
+                <input style={styles.input} placeholder="+57 300 000 0000" value={form.whatsapp} onChange={e => setForm({ ...form, whatsapp: e.target.value })} />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Empresa *</label>
+                <input style={styles.input} placeholder="Nombre de tu empresa" value={form.empresa} onChange={e => setForm({ ...form, empresa: e.target.value })} />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Cargo <span style={styles.optional}>(opcional)</span></label>
+                <input style={styles.input} placeholder="Tu cargo" value={form.cargo} onChange={e => setForm({ ...form, cargo: e.target.value })} />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Facturación anual *</label>
+                <select style={styles.input} value={form.facturacion} onChange={e => setForm({ ...form, facturacion: e.target.value })}>
+                  <option value="">Seleccioná un rango</option>
+                  {REVENUE_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
+                </select>
+              </div>
+            </div>
+            {error && <p style={styles.errorMsg}>{error}</p>}
+            <button style={styles.btnPrimary} onClick={handleSubmit} disabled={loading}>
+              {loading ? "Enviando..." : "Ver mi resultado →"}
+            </button>
+            <p style={styles.privacy}>Tu información es confidencial y no será compartida con terceros.</p>
+          </div>
+        )}
+
+        {/* RESULT */}
+        {phase === "result" && (
+          <div style={styles.card}>
+            <div style={{ ...styles.resultBadge, background: result.color, color: result.textColor }}>
+              {result.emoji} {result.level}
+            </div>
+            <div style={styles.scoreRow}>
+              <span style={styles.scoreNum}>{totalScore}</span>
+              <span style={styles.scoreMax}>/30</span>
+            </div>
+            <p style={styles.resultDesc}>{result.description}</p>
+            <div style={styles.breakdownTitle}>Tu score por dimensión</div>
+            <div style={styles.breakdown}>
+              {["Estrategia", "Prospecting", "Proceso", "Equipo", "Gobernanza"].map((dim, i) => {
+                const dimAnswers = answers.filter((_, idx) => Math.floor(idx / 2) === i);
+                const dimScore = dimAnswers.reduce((a, b) => a + b.score, 0);
+                const pct = (dimScore / 6) * 100;
+                return (
+                  <div key={dim} style={styles.dimRow}>
+                    <span style={styles.dimName}>{dim}</span>
+                    <div style={styles.dimBarBg}>
+                      <div style={{ ...styles.dimBarFill, width: `${pct}%` }} />
+                    </div>
+                    <span style={styles.dimScore}>{dimScore}/6</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div style={styles.ctaBox}>
+              <p style={styles.ctaText}>{result.cta}</p>
+              <a
+                href="https://calendly.com/agustin-issel-crecelera"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={styles.btnPrimary}
+              >
+                Agendar llamada con Crecelera →
+              </a>
+            </div>
+            <p style={styles.privacy}>Te enviamos un resumen detallado a tu email.</p>
+          </div>
+        )}
+
+        <div style={styles.footer}>
+          <span style={styles.footerBrand}>crecelera</span>
+          <span style={styles.footerTag}>Consultoría real. Resultados reales.</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  root: {
+    minHeight: "100vh",
+    background: "#0F0F0F",
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    padding: "40px 16px 80px",
+    fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
+  },
+  container: {
+    width: "100%",
+    maxWidth: 600,
+    display: "flex",
+    flexDirection: "column",
+    gap: 24,
+  },
+  card: {
+    background: "#1A1A1A",
+    borderRadius: 16,
+    padding: "40px 36px",
+    border: "1px solid #2A2A2A",
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+  },
+  badge: {
+    display: "inline-block",
+    background: "#CCFF66",
+    color: "#0F0F0F",
+    fontWeight: 800,
+    fontSize: 11,
+    letterSpacing: 3,
+    padding: "6px 14px",
+    borderRadius: 4,
+    alignSelf: "flex-start",
+  },
+  bigTitle: {
+    fontSize: 32,
+    fontWeight: 800,
+    color: "#FFFFFF",
+    lineHeight: 1.2,
+    margin: 0,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: "#888888",
+    margin: 0,
+    fontWeight: 500,
+  },
+  divider: {
+    height: 1,
+    background: "#2A2A2A",
+  },
+  body: {
+    fontSize: 15,
+    color: "#BBBBBB",
+    lineHeight: 1.7,
+    margin: 0,
+  },
+  tagsRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  tag: {
+    background: "#242424",
+    border: "1px solid #333",
+    color: "#CCFF66",
+    fontSize: 12,
+    fontWeight: 600,
+    padding: "5px 12px",
+    borderRadius: 20,
+  },
+  btnPrimary: {
+    background: "#CCFF66",
+    color: "#0F0F0F",
+    border: "none",
+    borderRadius: 8,
+    padding: "16px 28px",
+    fontSize: 15,
+    fontWeight: 800,
+    cursor: "pointer",
+    textAlign: "center",
+    textDecoration: "none",
+    display: "block",
+    transition: "transform 0.1s, opacity 0.2s",
+  },
+  progressBar: {
+    height: 4,
+    background: "#2A2A2A",
+    borderRadius: 2,
+    overflow: "hidden",
+  },
+  progressFill: {
+    height: "100%",
+    background: "#CCFF66",
+    borderRadius: 2,
+    transition: "width 0.3s ease",
+  },
+  progressLabel: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  dimLabel: {
+    fontSize: 11,
+    fontWeight: 700,
+    letterSpacing: 2,
+    color: "#CCFF66",
+    textTransform: "uppercase",
+  },
+  counterLabel: {
+    fontSize: 13,
+    color: "#666",
+    fontWeight: 500,
+  },
+  questionText: {
+    fontSize: 20,
+    fontWeight: 700,
+    color: "#FFFFFF",
+    lineHeight: 1.4,
+    margin: 0,
+  },
+  optionsCol: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+  },
+  optionBtn: {
+    background: "#242424",
+    border: "1.5px solid #333",
+    borderRadius: 10,
+    padding: "14px 18px",
+    color: "#CCCCCC",
+    fontSize: 14,
+    fontWeight: 500,
+    cursor: "pointer",
+    textAlign: "left",
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 12,
+    lineHeight: 1.5,
+    transition: "border-color 0.15s, background 0.15s",
+  },
+  optionSelected: {
+    background: "#1E2A0F",
+    border: "1.5px solid #CCFF66",
+    color: "#FFFFFF",
+  },
+  optionDot: {
+    width: 18,
+    height: 18,
+    minWidth: 18,
+    borderRadius: "50%",
+    border: "2px solid #444",
+    marginTop: 1,
+  },
+  optionDotSelected: {
+    width: 18,
+    height: 18,
+    minWidth: 18,
+    borderRadius: "50%",
+    border: "2px solid #CCFF66",
+    background: "#CCFF66",
+    marginTop: 1,
+  },
+  formTitle: {
+    fontSize: 24,
+    fontWeight: 800,
+    color: "#FFFFFF",
+    margin: 0,
+  },
+  formGrid: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 14,
+  },
+  formGroup: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 6,
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#AAAAAA",
+  },
+  optional: {
+    fontWeight: 400,
+    color: "#555",
+    fontSize: 12,
+  },
+  input: {
+    background: "#242424",
+    border: "1.5px solid #333",
+    borderRadius: 8,
+    padding: "12px 14px",
+    color: "#FFFFFF",
+    fontSize: 14,
+    outline: "none",
+    fontFamily: "inherit",
+  },
+  errorMsg: {
+    color: "#FF5C5C",
+    fontSize: 13,
+    margin: 0,
+  },
+  privacy: {
+    fontSize: 12,
+    color: "#555",
+    textAlign: "center",
+    margin: 0,
+  },
+  resultBadge: {
+    display: "inline-block",
+    fontWeight: 800,
+    fontSize: 14,
+    padding: "10px 20px",
+    borderRadius: 8,
+    alignSelf: "flex-start",
+    letterSpacing: 0.5,
+  },
+  scoreRow: {
+    display: "flex",
+    alignItems: "baseline",
+    gap: 4,
+  },
+  scoreNum: {
+    fontSize: 72,
+    fontWeight: 900,
+    color: "#CCFF66",
+    lineHeight: 1,
+  },
+  scoreMax: {
+    fontSize: 24,
+    color: "#555",
+    fontWeight: 600,
+  },
+  resultDesc: {
+    fontSize: 15,
+    color: "#BBBBBB",
+    lineHeight: 1.7,
+    margin: 0,
+  },
+  breakdownTitle: {
+    fontSize: 12,
+    fontWeight: 700,
+    letterSpacing: 2,
+    color: "#666",
+    textTransform: "uppercase",
+  },
+  breakdown: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+  },
+  dimRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+  },
+  dimName: {
+    fontSize: 13,
+    color: "#AAAAAA",
+    fontWeight: 500,
+    width: 100,
+    minWidth: 100,
+  },
+  dimBarBg: {
+    flex: 1,
+    height: 6,
+    background: "#2A2A2A",
+    borderRadius: 3,
+    overflow: "hidden",
+  },
+  dimBarFill: {
+    height: "100%",
+    background: "#CCFF66",
+    borderRadius: 3,
+    transition: "width 0.6s ease",
+  },
+  dimScore: {
+    fontSize: 12,
+    color: "#666",
+    fontWeight: 600,
+    width: 28,
+    textAlign: "right",
+  },
+  ctaBox: {
+    background: "#0F0F0F",
+    border: "1px solid #2A2A2A",
+    borderRadius: 12,
+    padding: "24px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 16,
+  },
+  ctaText: {
+    fontSize: 15,
+    color: "#CCCCCC",
+    lineHeight: 1.6,
+    margin: 0,
+    fontWeight: 500,
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0 4px",
+  },
+  footerBrand: {
+    fontSize: 16,
+    fontWeight: 900,
+    color: "#CCFF66",
+    letterSpacing: -0.5,
+  },
+  footerTag: {
+    fontSize: 12,
+    color: "#444",
+  },
+};
