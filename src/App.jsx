@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/rtf8jwqh1etp1jg5oql6lwe5ulh9736a"; // Reemplazar en Make.com
+const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/v4uj6di1v0abvh94yn7mvphb8x93majn"; // Reemplazar en Make.com
 
 const QUESTIONS = [
   {
