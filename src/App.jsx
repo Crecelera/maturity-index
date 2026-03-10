@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/v4uj6di1v0abvh94yn7mvphb8x93majn";
+const MAKE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz7fhFw0RlkxYjtgpNTZRtEw5IDb-5_6VCZEre3qa0blDPbd-sESddyxgZoLDSudmDg/exec";
 
 const QUESTIONS = [
   { id: 1, dimension: "Estrategia", question: "¿Tenés claro quién es tu cliente ideal y ese criterio guía las decisiones comerciales de tu equipo?", options: [{ text: "No está definido formalmente", score: 1 },{ text: "Está definido pero no siempre se aplica", score: 2 },{ text: "Está claro y guía todas las decisiones comerciales", score: 3 }] },
