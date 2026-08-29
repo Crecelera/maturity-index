@@ -87,11 +87,11 @@ const PREGUNTAS = [
 ];
 
 const HERIDAS = {
-  p1: "Le vendés a quien aparece. El equipo pone la misma energía en un cliente que deja diez veces menos, y eso recién se ve cuando cerrás el año.",
-  p2: "Tu crecimiento depende de referidos. Funciona bárbaro hasta el mes que no llega ninguno, y ahí no hay palanca que puedas mover.",
-  p3: "Las propuestas salen y el seguimiento queda en tu memoria. Las que se caen, se caen en silencio: nunca sabés si fue el precio, el timing o que simplemente se olvidaron.",
-  p4: "El sistema comercial sos vos, y eso le pone un techo a cuánto podés crecer. A menos que te puedas clonar.",
-  p5: "Estás manejando mirando por el espejo retrovisor. Te enterás de cómo viene el mes cuando ya no podés hacer nada para cambiarlo.",
+  p1: "Le vendés a quien aparece. El equipo pone la misma energía en un cliente que deja diez veces menos, y eso recién se ve cuando cerrás el año. Sin un perfil que filtre, cada vendedor decide por su cuenta qué vale la pena perseguir. ¿Cómo escalás un equipo si cada uno apunta para un lado distinto?",
+  p2: "Tu crecimiento depende de referidos. Funciona bárbaro hasta el mes que no llega ninguno, y ahí no hay palanca que puedas mover: no podés abrir la canilla cuando la necesitás ni cerrarla cuando estás desbordado. ¿Cómo planificás un año así? ¿Cómo te comprometés con una meta si no controlás de dónde salen las oportunidades?",
+  p3: "Las propuestas salen y el seguimiento queda en tu memoria. Las que se caen, se caen en silencio: no sabés por qué perdés, ni por qué ganás. Sin ese conocimiento, ¿cómo mejorás el proceso? ¿Cómo hacés ajustes que efectivamente impacten tus resultados? Cada propuesta arranca de cero y el equipo repite los mismos errores.",
+  p4: "El sistema comercial sos vos, y eso le pone un techo a cuánto podés crecer. A menos que te puedas clonar. Cada oportunidad grande espera a que vos tengas agenda, y cada persona que sumás necesita que le pases lo que sabés, sin que exista un lugar donde eso esté escrito. ¿Qué pasa con las ventas la semana que no estás?",
+  p5: "Estás manejando mirando por el espejo retrovisor. Te enterás de cómo viene el mes cuando ya no podés hacer nada para cambiarlo. Sin números, las decisiones se toman por intuición y las discusiones internas se ganan por volumen de voz. ¿Cómo sabés si lo que cambiaste el mes pasado funcionó?",
 };
 
 /* Lo que ya está sólido (score 4-5). Reconocer antes de golpear. */
@@ -253,7 +253,7 @@ export default function App() {
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
         .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
-        .col { max-width: 820px; }
+        .col { max-width: 880px; margin: 0 auto; }
         .opt:hover { background: rgba(255,255,255,0.16) !important; transform: translateX(4px); }
         .cta:hover { transform: translateY(-2px); }
         .lnk:hover { color: ${LIMA} !important; }
@@ -658,19 +658,26 @@ function Reveal({ respuestas, nombre, contexto = {} }) {
             Agendá 30 minutos
           </a>
 
-          <p style={{ fontFamily: TEXTO, fontSize: 14, color: "rgba(255,255,255,0.55)", marginTop: 16, maxWidth: 380, textAlign: "center", fontStyle: "italic" }}>
+          <p style={{ fontFamily: TEXTO, fontSize: 14, color: "rgba(255,255,255,0.55)", marginTop: 16, maxWidth: 420, textAlign: "center", fontStyle: "italic" }}>
             Sin propuesta, sin presentación. Media hora para entender tu caso.
           </p>
         </>
       )}
 
       <div style={{ marginTop: 70, paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.15)" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 22, alignItems: "center", marginBottom: 24 }}>
-          <a className="lnk" href={`mailto:${EMAIL}`} style={{ fontFamily: TEXTO, fontSize: 15, color: "rgba(255,255,255,0.8)", textDecoration: "none", transition: "color 150ms" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "14px 30px", alignItems: "center", marginBottom: 26 }}>
+          <a className="lnk" href={`mailto:${EMAIL}`} style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: TEXTO, fontSize: 16, color: "rgba(255,255,255,0.85)", textDecoration: "none", transition: "color 150ms" }}>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true" style={{ flexShrink: 0 }}>
+              <rect x="2" y="4" width="20" height="16" rx="2.5" />
+              <path d="M2.5 6.5 L12 13 L21.5 6.5" />
+            </svg>
             {EMAIL}
           </a>
-          <a className="lnk" href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={{ fontFamily: TEXTO, fontSize: 15, color: "rgba(255,255,255,0.8)", textDecoration: "none", transition: "color 150ms" }}>
-            LinkedIn
+          <a className="lnk" href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: TEXTO, fontSize: 16, color: "rgba(255,255,255,0.85)", textDecoration: "none", transition: "color 150ms", wordBreak: "break-all" }}>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{ flexShrink: 0 }}>
+              <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13Zm1.78 13.02H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+            </svg>
+            {LINKEDIN.replace(/^https?:\/\//, "").replace(/\/$/, "")}
           </a>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
