@@ -157,6 +157,9 @@ const CANCHAS = [
   "Salud", "Servicios profesionales", "Tecnología & software", "Otro",
 ];
 
+const TICKET_ALTO = ["USD 20.000 – 100.000", "Más de USD 100.000"];
+const VOLUMEN_BAJO = ["Menos de 10", "10 – 50"];
+
 const ROLES = ["Founder / CEO", "Dirección comercial", "Gerencia o jefatura", "Otro"];
 
 const TICKETS = ["Menos de USD 1.000", "USD 1.000 – 5.000", "USD 5.000 – 20.000", "USD 20.000 – 100.000", "Más de USD 100.000"];
