@@ -87,14 +87,42 @@ const PREGUNTAS = [
 ];
 
 const HERIDAS = {
-  p1: "Le vendés a quien aparece. El equipo pone la misma energía en un cliente que deja diez veces menos, y eso recién se ve cuando cerrás el año. Sin un perfil que filtre, cada vendedor decide por su cuenta qué vale la pena perseguir. ¿Cómo escalás un equipo si cada uno apunta para un lado distinto?",
-  p2: "Tu crecimiento depende de referidos. Funciona bárbaro hasta el mes que no llega ninguno, y ahí no hay palanca que puedas mover: no podés abrir la canilla cuando la necesitás ni cerrarla cuando estás desbordado. ¿Cómo planificás un año así? ¿Cómo te comprometés con una meta si no controlás de dónde salen las oportunidades?",
-  p3: "Las propuestas salen y el seguimiento queda en tu memoria. Las que se caen, se caen en silencio: no sabés por qué perdés, ni por qué ganás. Sin ese conocimiento, ¿cómo mejorás el proceso? ¿Cómo hacés ajustes que efectivamente impacten tus resultados? Cada propuesta arranca de cero y el equipo repite los mismos errores.",
-  p4: "El sistema comercial sos vos, y eso le pone un techo a cuánto podés crecer. A menos que te puedas clonar. Cada oportunidad grande espera a que vos tengas agenda, y cada persona que sumás necesita que le pases lo que sabés, sin que exista un lugar donde eso esté escrito. ¿Qué pasa con las ventas la semana que no estás?",
-  p5: "Estás manejando mirando por el espejo retrovisor. Te enterás de cómo viene el mes cuando ya no podés hacer nada para cambiarlo. Sin números, las decisiones se toman por intuición y las discusiones internas se ganan por volumen de voz. ¿Cómo sabés si lo que cambiaste el mes pasado funcionó?",
+  p1: {
+    quePasa: "Le vendés a quien aparece.",
+    equipo: "Sin segmentación, todo se trata igual. El mismo esfuerzo, el mismo tiempo y el mismo discurso para clientes que no compran de la misma forma. Y lo que funciona en un segmento puede matarte un deal en otro. No tenés una arquitectura que te permita asignar esfuerzo y recursos de manera eficiente, y con equipo el problema se multiplica: la estrategia de segmentación termina siendo el criterio de cada vendedor en lugar de una decisión de negocio. Así no hay base para vender más con el esfuerzo y el ticket adecuados, y sin esa base, escalar es apretar el acelerador con el freno de mano puesto.",
+    solo: "Sin segmentación, todo se trata igual. El mismo esfuerzo, el mismo tiempo y el mismo discurso para clientes que no compran de la misma forma. Y lo que funciona en un segmento puede matarte un deal en otro. No tenés una arquitectura que te permita asignar esfuerzo y recursos de manera eficiente, y el recurso que estás asignando mal es tu propio tiempo: cada reunión con alguien que nunca iba a comprar es una reunión que no tuviste con alguien que sí. El criterio existe, pero vive en tu cabeza y no está escrito en ningún lado. ¿Sobre qué base vas a sumar a la primera persona que venda sin vos?",
+  },
+  p2: {
+    quePasa: "Tu crecimiento depende de referidos que no controlás.",
+    equipo: "El pipeline se llena solo cuando alguien te recomienda, y eso no es un modelo: es suerte con buena reputación. Funciona bárbaro hasta el mes que no llega ninguno, y ahí no hay palanca que puedas mover — no podés abrir la canilla cuando la necesitás ni cerrarla cuando estás desbordado. Con equipo el problema es doble: no hay un rol que se levante a prospectar, así que cada vendedor sale a buscar cuando se le vacía la agenda, y cuando está ocupado no busca nadie. Por eso el pipeline te sube y baja sin que puedas explicar por qué. No tenés proyecciones, tenés deseos. Y que se cumplan no depende de vos.",
+    solo: "El pipeline se llena solo cuando alguien te recomienda, y eso no es un modelo: es suerte con buena reputación. Y como prospectar compite con entregar, estás en un modelo stop & go: el mes que estás produciendo no buscás, y cuando terminás de producir el pipeline está vacío. Ahí salís a buscar con urgencia, que es la peor posición para negociar — el que necesita cerrar este mes acepta condiciones que no aceptaría el mes que viene. No tenés proyecciones, tenés deseos. Y que se cumplan no depende de vos.",
+  },
+  p3: {
+    quePasa: "Las propuestas salen y el seguimiento queda en la memoria.",
+    equipo: "Ya hiciste el esfuerzo, el heavy lifting — prospectaste, te reuniste, entendiste el problema, armaste la propuesta: horas y horas de trabajo. Y te quedás sin nafta en el último kilómetro. Cada vendedor hace seguimiento como puede, desestructurado. Las oportunidades que perdés, no sabés del todo por qué. Las que ganás, seguramente tampoco. Pero lo importante no es solamente entender para mejorar los procesos: lo importante es vender, generar ingresos. Y en ese sentido, ¿qué pasa si el sí que estás esperando está en ese seguimiento que nunca hiciste?",
+    solo: "Ya hiciste el esfuerzo, el heavy lifting — prospectaste, te reuniste, entendiste el problema, armaste la propuesta: horas y horas de trabajo. Y te quedás sin nafta en el último kilómetro. El seguimiento compite con entregar, facturar y resolver lo urgente, y siempre pierde: es lo único que no tiene un cliente reclamándote del otro lado. Las oportunidades que perdés, no sabés del todo por qué. Las que ganás, seguramente tampoco. Pero lo importante no es solamente entender para mejorar los procesos: lo importante es vender, generar ingresos. Y en ese sentido, ¿qué pasa si el sí que estás esperando está en ese seguimiento que nunca hiciste?",
+  },
+  p4: {
+    quePasa: "El sistema comercial depende de vos.",
+    equipo: "Todos hacen todo: el mismo que prospecta arma la propuesta, hace el seguimiento y después atiende al cliente que ya cerró. Nadie es dueño de una etapa, así que cuando algo se cae no hay a quién preguntarle qué pasó. Sin roles definidos el rendimiento depende de la voluntad de cada uno, y las diferencias entre el que vende bien y el que no vende se explican con \"es que tiene más calle\" en lugar de con un método que se pueda copiar. Y en los deals grandes seguís entrando vos, porque en el fondo sabés que sin vos no se cierran. ¿Estás tranquilo si no te metés por tres semanas?",
+    solo: "Y eso le pone un techo a cuánto podés crecer, a menos que te puedas clonar. Cada oportunidad grande espera a que vos tengas agenda, y las chicas se caen porque no llegás. Tu capacidad de venta es tu capacidad de atención, que compartís con el día a día del negocio, los clientes y los problemas inesperados que a todos nos surgen cuando más complicados estamos. Probablemente seas el mejor vendedor, pero sos también el techo del crecimiento. Y cuando decidís sumar a alguien, no tenés un proceso: tenés tu experiencia y tu know how, y eso es difícil de enseñar. Estirás la curva de aprendizaje — tenés suerte si el vendedor la sobrevive, o te conformás con que lo haga a su manera. Buena suerte tomándote vacaciones.",
+  },
+  p5: {
+    quePasa: "No tenés un sistema donde vivan tus ventas.",
+    equipo: "La información está repartida: un poco en la cabeza del vendedor, mucho en WhatsApp, y algo en un Excel que alguien actualizó hace tres semanas. No hay una vista donde puedas ver en qué está trabada cada oportunidad, así que te enterás de que un deal se cayó cuando ya se cayó. Y como no hay números, las discusiones internas se ganan por volumen de voz: el que argumenta mejor define la prioridad, no el que tiene razón. ¿Te imaginás arrancar un viaje largo sin Waze? Bueno, estás en esa: el auto avanza, pero no sabés si vas por el camino rápido, si hay un corte adelante, ni a qué hora llegás.",
+    solo: "Está todo en tu cabeza, y eso se siente como control: sabés con quién hablaste, qué quedó pendiente, a quién tenés que llamar. Pero tu cabeza no te muestra el conjunto — te muestra lo que te acordás, que casi siempre es lo último que pasó y lo que más te preocupa. Las oportunidades que se enfrían no te avisan que se están enfriando, se van apagando en silencio mientras vos atendés lo que grita. Y sin números no podés comparar: no sabés si este mes es mejor o peor que el anterior, ni si lo que cambiaste sirvió de algo. ¿Te imaginás arrancar un viaje largo sin Waze? Bueno, estás en esa: el auto avanza, pero no sabés si vas por el camino rápido, si hay un corte adelante, ni a qué hora llegás. Y como sos vos solo, no hay un copiloto que te ayude.",
+  },
 };
 
-/* Lo que ya está sólido (score 4-5). Reconocer antes de golpear. */
+/* Indicadores impactados por dimensión. Se nombran, nunca se cuantifican. */
+const INDICADORES = {
+  p1: ["Esfuerzo comercial por oportunidad", "Generación de leads calificados", "Tasa de cierre"],
+  p2: ["Volumen de pipeline (en dinero)", "Predictibilidad del forecast"],
+  p3: ["Tasa de cierre", "Revenue", "Trazabilidad"],
+  p4: ["Capacidad de crecimiento", "Curva de aprendizaje"],
+  p5: ["Exactitud del forecast", "Visibilidad del pipeline", "Velocidad de decisión"],
+};
+
 const FORTALEZAS = {
   p1: "Sabés a quién le vendés. Eso ya te ahorra el esfuerzo que otros tiran en clientes que nunca iban a cerrar.",
   p2: "Tenés canales que traen oportunidades sin depender de la suerte del mes.",
@@ -103,24 +131,34 @@ const FORTALEZAS = {
   p5: "Tenés números para decidir. La mayoría decide con intuición y se entera tarde.",
 };
 
-/* Cruces: cuando dos dimensiones fallan juntas, el problema es uno solo. */
+/* Cruces: dos dimensiones flojas que en realidad son un solo problema. */
 const CRUCES = [
-  { par: ["p2", "p5"], texto: "No controlás el flujo y tampoco lo medís. Por eso nunca vas a saber si el problema es que entran pocas oportunidades o que se caen las que entran." },
-  { par: ["p1", "p2"], texto: "Prospectás sin tener claro a quién. Todo lo que generes arriba del funnel va a llegar sucio abajo." },
-  { par: ["p3", "p5"], texto: "Sin proceso de seguimiento y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje." },
-  { par: ["p3", "p4"], texto: "El proceso vive en tu cabeza y el equipo depende de vos. Cada persona que sumes va a copiar tu memoria, no tu método." },
-  { par: ["p1", "p4"], texto: "Vos sos el que sabe a quién hay que venderle. Mientras eso no esté escrito, no es transferible: se va con vos a cada reunión." },
+  { par: ["p2", "p5"],
+    equipo: "No controlás el flujo y tampoco lo medís. Por eso nunca vas a saber si el problema es que entran pocas oportunidades o que se caen las que entran.",
+    solo:   "No controlás el flujo y tampoco lo medís. Por eso nunca vas a saber si el problema es que entran pocas oportunidades o que se caen las que entran." },
+  { par: ["p1", "p2"],
+    equipo: "Prospectás sin tener claro a quién. Todo lo que generes arriba del funnel va a llegar sucio abajo, y el equipo va a trabajar el doble para cerrar la mitad.",
+    solo:   "Prospectás sin tener claro a quién. Todo lo que generes arriba del funnel va a llegar sucio abajo, y cada hora que ponés ahí es una hora que no recuperás." },
+  { par: ["p3", "p5"],
+    equipo: "Sin proceso de seguimiento y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje.",
+    solo:   "Sin proceso de seguimiento y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje." },
+  { par: ["p3", "p4"],
+    equipo: "El proceso vive en tu cabeza y el equipo depende de vos. Cada persona que sumes va a copiar tu memoria, no tu método.",
+    solo:   "El proceso vive en tu cabeza y sos el único que lo ejecuta. No hay nada que puedas delegar todavía, porque nunca existió fuera tuyo." },
+  { par: ["p1", "p4"],
+    equipo: "Vos sos el que sabe a quién hay que venderle, y eso no está escrito. El equipo no puede aplicar un criterio que nunca salió de tu cabeza.",
+    solo:   "Vos sos el que sabe a quién hay que venderle. Mientras eso no esté escrito no es transferible: se va con vos a cada reunión." },
 ];
-
-const TICKET_ALTO = ["USD 20.000 – 100.000", "Más de USD 100.000"];
-const VOLUMEN_BAJO = ["Menos de 10", "10 – 50"];
 
 const CANCHAS = [
-  "Servicios profesionales", "BPO y contact center", "Tecnología y software",
-  "Marketing y agencias", "Industria y manufactura", "Construcción e inmobiliario",
-  "Concesionarios y maquinaria", "Distribución y mayoristas", "Retail y ecommerce",
-  "Logística y transporte", "Salud", "Educación y formación", "Otro",
+  "BPO & contact center", "Construcción & inmobiliario", "Distribución & mayoristas",
+  "Educación & formación", "Industria & manufactura", "Logística & transporte",
+  "Maquinaria & concesionarios", "Marketing & agencias", "Retail & ecommerce",
+  "Salud", "Servicios profesionales", "Tecnología & software", "Otro",
 ];
+
+const ROLES = ["Founder / CEO", "Dirección comercial", "Gerencia o jefatura", "Otro"];
+
 const TICKETS = ["Menos de USD 1.000", "USD 1.000 – 5.000", "USD 5.000 – 20.000", "USD 20.000 – 100.000", "Más de USD 100.000"];
 const VENTAS = ["Menos de 10", "10 – 50", "50 – 200", "200 – 1.000", "Más de 1.000"];
 const PROPUESTAS = ["Cada una se arma casi de cero", "Tenemos plantilla, pero se personaliza mucho", "Modelo estándar con partes fijas y variables"];
@@ -161,6 +199,35 @@ function FlechaCurva({ color = AZUL_HOND, style = {} }) {
   );
 }
 
+
+/* Arma el resumen textual de lo que vio el prospecto, para guardarlo en el Sheet */
+function armarResumen(respuestas, contexto) {
+  const vals = PREGUNTAS.map((p) => ({ ...p, score: respuestas[p.id] || 0 }));
+  const prom = vals.reduce((a, b) => a + b.score, 0) / vals.length;
+  const maduro = prom >= 4 && vals.every((v) => v.score >= 3);
+  const ctx = respuestas.p4 === 1 ? "solo" : "equipo";
+  if (maduro) return "MADURO · Se le mostró: sistema construido, sin CTA de venta.";
+
+  let br = vals.filter((v) => v.score <= 2).sort((a, b) => a.score - b.score);
+  if (!br.length) br = vals.filter((v) => v.score <= 3).sort((a, b) => a.score - b.score);
+  const visibles = br.map((b) => b.id);
+  const fuertes = vals.filter((v) => v.score >= 4).sort((a, b) => b.score - a.score).slice(0, 2);
+  const cruce = CRUCES.find((c) => c.par.every((id) => visibles.includes(id)));
+
+  const L = [];
+  L.push(`Contexto: ${ctx === "solo" ? "founder solo" : "con equipo"} · ${br.length} de 5 dimensiones con fuga.`);
+  if (fuertes.length) L.push(`A favor: ${fuertes.map((f) => f.dimension).join(" · ")}.`);
+  L.push("");
+  br.forEach((b) => {
+    L.push(`— ${b.dimension.toUpperCase()} (nivel ${b.score}/5)`);
+    L.push(`  ${HERIDAS[b.id].quePasa} ${HERIDAS[b.id][ctx]}`);
+    L.push(`  Indicadores: ${INDICADORES[b.id].join(", ")}`);
+    L.push("");
+  });
+  if (cruce) L.push(`CRUCE: ${cruce[ctx]}`);
+  return L.join("\n");
+}
+
 /* ── App ─────────────────────────────────────────────────────── */
 
 export default function App() {
@@ -168,7 +235,7 @@ export default function App() {
   const [idx, setIdx] = useState(0);
   const [respuestas, setRespuestas] = useState({});
   const [contexto, setContexto] = useState({ cancha: "", ticket: "", ventas: "", propuestas: "" });
-  const [contacto, setContacto] = useState({ nombre: "", email: "", empresa: "" });
+  const [contacto, setContacto] = useState({ nombre: "", email: "", empresa: "", rol: "" });
   const [enviando, setEnviando] = useState(false);
   const [errorGate, setErrorGate] = useState("");
   const topRef = useRef(null);
@@ -202,9 +269,9 @@ export default function App() {
   }
 
   async function enviar() {
-    const { nombre, email, empresa } = contacto;
-    if (!nombre.trim() || !email.trim() || !empresa.trim()) {
-      setErrorGate("Completá los tres campos para ver tu lectura.");
+    const { nombre, email, empresa, rol } = contacto;
+    if (!nombre.trim() || !email.trim() || !empresa.trim() || !rol) {
+      setErrorGate("Completá todos los campos para ver tu lectura.");
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -218,7 +285,7 @@ export default function App() {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ ...contacto, ...contexto, respuestas, origen: "lead-magnet" }),
+        body: JSON.stringify({ ...contacto, ...contexto, respuestas, resumen: armarResumen(respuestas, contexto), origen: "lead-magnet" }),
       });
     } catch (e) {
       console.error("Envío falló:", e);
@@ -254,6 +321,9 @@ export default function App() {
 
         .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
         .col { max-width: 880px; margin: 0 auto; }
+        .col-ancho { max-width: 1080px; margin: 0 auto; }
+        .cajas { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 860px) { .cajas { grid-template-columns: 1fr 1fr; } }
         .opt:hover { background: rgba(255,255,255,0.16) !important; transform: translateX(4px); }
         .cta:hover { transform: translateY(-2px); }
         .lnk:hover { color: ${LIMA} !important; }
@@ -316,7 +386,7 @@ export default function App() {
         )}
 
         {paso === "reveal" && (
-          <div className="col">
+          <div className="col-ancho">
             <Reveal respuestas={respuestas} nombre={contacto.nombre} contexto={contexto} />
           </div>
         )}
@@ -506,13 +576,19 @@ function Gate({ valores, setValores, error, enviando, onEnviar, onVolver }) {
       </p>
 
       <Campo label="Nombre">
-        <input value={valores.nombre} onChange={(e) => set("nombre", e.target.value)} placeholder="Tu nombre" style={inputStyle} />
+        <input value={valores.nombre} onChange={(e) => set("nombre", e.target.value)} placeholder="Nombre y apellido" style={inputStyle} />
       </Campo>
       <Campo label="Email">
         <input type="email" value={valores.email} onChange={(e) => set("email", e.target.value)} placeholder="tu@empresa.com" style={inputStyle} />
       </Campo>
       <Campo label="Empresa">
         <input value={valores.empresa} onChange={(e) => set("empresa", e.target.value)} placeholder="Nombre de tu empresa" style={inputStyle} />
+      </Campo>
+      <Campo label="Tu rol">
+        <select value={valores.rol} onChange={(e) => set("rol", e.target.value)} style={inputStyle}>
+          <option value="">Elegí una opción</option>
+          {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
+        </select>
       </Campo>
 
       {error && <p style={{ fontFamily: TEXTO, fontSize: 14.5, color: LIMA, margin: "0 0 18px", fontWeight: 600 }}>{error}</p>}
@@ -537,27 +613,28 @@ function Gate({ valores, setValores, error, enviando, onEnviar, onVolver }) {
 function Reveal({ respuestas, nombre, contexto = {} }) {
   const vals = PREGUNTAS.map((p) => ({ ...p, score: respuestas[p.id] || 0 }));
   const promedio = vals.reduce((a, b) => a + b.score, 0) / vals.length;
-  // Maduro sólo si además NINGUNA dimensión está floja: un 2 aislado sigue siendo una fuga real
   const maduro = promedio >= 4 && vals.every((v) => v.score >= 3);
   const inicial = promedio <= 1.6;
 
-  let brechas = vals.filter((v) => v.score <= 2).sort((a, b) => a.score - b.score).slice(0, 3);
-  if (!brechas.length && !maduro) {
-    brechas = vals.filter((v) => v.score <= 3).sort((a, b) => a.score - b.score).slice(0, 2);
-  }
+  // Contexto: founder solo (p4 === 1) vs con equipo
+  const ctx = respuestas.p4 === 1 ? "solo" : "equipo";
 
-  // Lo que ya está sólido: hasta 2, para reconocer sin diluir
+  // TODAS las fugas, sin tope. Ordenadas de peor a mejor.
+  let brechas = vals.filter((v) => v.score <= 2).sort((a, b) => a.score - b.score);
+  if (!brechas.length && !maduro) {
+    brechas = vals.filter((v) => v.score <= 3).sort((a, b) => a.score - b.score);
+  }
+  const visibles = brechas.map((b) => b.id);
+
   const fuertes = vals.filter((v) => v.score >= 4).sort((a, b) => b.score - a.score).slice(0, 2);
 
-  // Cruce: primera combinación cuyas dos dimensiones estén flojas
-  const flojas = vals.filter((v) => v.score <= 2).map((v) => v.id);
-  const cruce = CRUCES.find((c) => c.par.every((id) => flojas.includes(id)));
+  // El cruce sólo aparece si AMBAS dimensiones están a la vista
+  const cruce = CRUCES.find((c) => c.par.every((id) => visibles.includes(id)));
 
-  // Línea de contexto: ticket alto + volumen bajo = cada oportunidad pesa
   const pesaCadaDeal =
     TICKET_ALTO.includes(contexto.ticket) && VOLUMEN_BAJO.includes(contexto.ventas);
 
-  const parrafo = { fontFamily: TEXTO, fontSize: "clamp(17.5px, 1.5vw, 20.5px)", lineHeight: 1.6, color: "rgba(255,255,255,0.9)" };
+  const parrafo = { fontFamily: TEXTO, fontSize: "clamp(16px, 1.25vw, 17.5px)", lineHeight: 1.6, color: "rgba(255,255,255,0.88)" };
 
   return (
     <div style={{ paddingTop: 54 }}>
@@ -566,32 +643,30 @@ function Reveal({ respuestas, nombre, contexto = {} }) {
           <h2 style={{ fontFamily: DISPLAY, fontWeight: 900, fontSize: "clamp(33px, 4.7vw, 56px)", lineHeight: 1.06, color: BLANCO, letterSpacing: "-0.03em", margin: "0 0 28px" }}>
             Tu sistema comercial está construido.
           </h2>
-          <p style={parrafo}>
+          <p style={{ ...parrafo, fontSize: "clamp(17.5px, 1.5vw, 20.5px)" }}>
             Las cinco dimensiones que medimos están sólidas. No necesitás lo que hacemos —
             y eso también es un resultado.
           </p>
-          <p style={{ ...parrafo, marginTop: 20 }}>
+          <p style={{ ...parrafo, fontSize: "clamp(17.5px, 1.5vw, 20.5px)", marginTop: 20 }}>
             Si en algún momento el sistema deja de acompañar el crecimiento, sabés dónde encontrarnos.
           </p>
         </>
       ) : (
         <>
           <h2 style={{ fontFamily: DISPLAY, fontWeight: 900, fontSize: "clamp(32px, 4.5vw, 54px)", lineHeight: 1.08, color: BLANCO, letterSpacing: "-0.03em", margin: "0 0 40px" }}>
-            {nombre ? nombre.trim().split(" ")[0] + ", tu" : "Tu"} sistema comercial tiene fugas en{" "}
+            {nombre ? nombre.trim().split(" ")[0] + ", tu" : "Tu"} sistema comercial pierde en{" "}
             <span style={{ color: LIMA }}>{brechas.length} de las 5</span> dimensiones que medimos.
           </h2>
 
           {fuertes.length > 0 && (
-            <div style={{ marginBottom: 44 }}>
+            <div style={{ marginBottom: 46 }}>
               <div style={{ fontFamily: DISPLAY, fontSize: 12.5, fontWeight: 800, letterSpacing: "2.6px", color: "rgba(255,255,255,0.55)", textTransform: "uppercase", marginBottom: 16 }}>
                 Lo que ya tenés a favor
               </div>
               {fuertes.map((f) => (
                 <div key={f.id} style={{ display: "flex", gap: 14, alignItems: "flex-start", marginBottom: 12 }}>
                   <span style={{ color: LIMA, fontFamily: DISPLAY, fontWeight: 900, fontSize: 17, lineHeight: 1.5, flexShrink: 0 }}>✓</span>
-                  <p style={{ ...parrafo, fontSize: "clamp(15.5px, 1.25vw, 17px)", color: "rgba(255,255,255,0.78)", margin: 0 }}>
-                    {FORTALEZAS[f.id]}
-                  </p>
+                  <p style={{ ...parrafo, color: "rgba(255,255,255,0.76)", margin: 0 }}>{FORTALEZAS[f.id]}</p>
                 </div>
               ))}
             </div>
@@ -601,42 +676,66 @@ function Reveal({ respuestas, nombre, contexto = {} }) {
             Dónde se te escapa
           </div>
 
-          {brechas.map((b) => (
-            <div key={b.id} style={{ borderLeft: `3px solid ${LIMA}`, padding: "2px 0 4px 22px", marginBottom: 26 }}>
-              <div style={{ fontFamily: DISPLAY, fontSize: 13, fontWeight: 800, letterSpacing: "2.2px", color: LIMA, textTransform: "uppercase", marginBottom: 10 }}>
-                {b.dimension}
+          <div className="cajas">
+            {brechas.map((b) => (
+              <div key={b.id} style={{
+                background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.14)",
+                borderRadius: 12, padding: "26px 26px 22px", display: "flex", flexDirection: "column",
+              }}>
+                <div style={{ fontFamily: DISPLAY, fontSize: 13, fontWeight: 800, letterSpacing: "2.2px", color: LIMA, textTransform: "uppercase", marginBottom: 14 }}>
+                  {b.dimension}
+                </div>
+                <p style={{ fontFamily: DISPLAY, fontSize: "clamp(18px, 1.5vw, 21px)", fontWeight: 700, lineHeight: 1.28, color: BLANCO, margin: "0 0 16px", letterSpacing: "-0.015em" }}>
+                  {HERIDAS[b.id].quePasa}
+                </p>
+                <p style={{ ...parrafo, margin: "0 0 20px", flexGrow: 1 }}>
+                  {HERIDAS[b.id][ctx]}
+                </p>
+                <div>
+                  <div style={{ fontFamily: DISPLAY, fontSize: 10.5, fontWeight: 800, letterSpacing: "2px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", marginBottom: 10 }}>
+                    Indicadores que impacta
+                  </div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+                    {INDICADORES[b.id].map((ind) => (
+                      <span key={ind} style={{
+                        fontFamily: TEXTO, fontSize: 13, fontWeight: 600, color: LIMA,
+                        border: `1px solid ${LIMA}44`, background: `${LIMA}12`,
+                        borderRadius: 20, padding: "5px 13px",
+                      }}>{ind}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <p style={{ ...parrafo, margin: 0 }}>{HERIDAS[b.id]}</p>
-            </div>
-          ))}
+            ))}
+          </div>
 
           {cruce && (
-            <div style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.16)", borderRadius: 12, padding: "26px 28px", marginTop: 32 }}>
-              <div style={{ fontFamily: DISPLAY, fontSize: 11.5, fontWeight: 800, letterSpacing: "2.4px", color: LIMA, textTransform: "uppercase", marginBottom: 12 }}>
+            <div style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.16)", borderRadius: 12, padding: "28px 30px", marginTop: 26 }}>
+              <div style={{ fontFamily: DISPLAY, fontSize: 12, fontWeight: 800, letterSpacing: "2.4px", color: LIMA, textTransform: "uppercase", marginBottom: 12 }}>
                 Y no son problemas separados
               </div>
-              <p style={{ ...parrafo, margin: 0 }}>{cruce.texto}</p>
+              <p style={{ ...parrafo, fontSize: "clamp(17px, 1.4vw, 19px)", margin: 0 }}>{cruce[ctx]}</p>
             </div>
           )}
 
           {pesaCadaDeal && (
-            <p style={{ ...parrafo, marginTop: 30, color: "rgba(255,255,255,0.82)" }}>
+            <p style={{ ...parrafo, fontSize: "clamp(17px, 1.4vw, 19px)", marginTop: 30 }}>
               Con tu ticket y tu volumen, cada oportunidad que se cae no es un número en un reporte:
               es una porción real del año.
             </p>
           )}
 
-          <div style={{ height: 1, background: "rgba(255,255,255,0.18)", margin: "34px 0 32px" }} />
+          <div style={{ height: 1, background: "rgba(255,255,255,0.18)", margin: "40px 0 34px" }} />
 
-          <p style={{ ...parrafo, margin: "0 0 20px" }}>
-            <strong style={{ color: BLANCO }}>Lo que esta lectura te dice:</strong> hay {brechas.length === 1 ? "un punto" : `${brechas.length} puntos`} donde tu sistema comercial pierde. Ninguno es un problema de esfuerzo.
+          <p style={{ ...parrafo, fontSize: "clamp(17.5px, 1.5vw, 20.5px)", margin: "0 0 20px" }}>
+            <strong style={{ color: BLANCO }}>Lo que esta lectura te dice:</strong> dónde tu sistema comercial pierde, y qué indicadores te está tocando. Ninguno de estos puntos es un problema de esfuerzo.
           </p>
-          <p style={{ ...parrafo, margin: "0 0 30px" }}>
+          <p style={{ ...parrafo, fontSize: "clamp(17.5px, 1.5vw, 20.5px)", margin: "0 0 30px" }}>
             <strong style={{ color: BLANCO }}>Lo que no te dice:</strong> cuánto te está costando. Cuántas oportunidades se caen por mes, cuánto revenue queda sobre la mesa, y cuál de estas fugas te drena más.
           </p>
 
           <div style={{ background: AZUL, borderRadius: 12, padding: "30px", margin: "0 0 32px" }}>
-            <p style={{ ...parrafo, color: BLANCO, margin: 0 }}>
+            <p style={{ ...parrafo, fontSize: "clamp(17.5px, 1.5vw, 20.5px)", color: BLANCO, margin: 0 }}>
               {inicial ? (
                 <>Y esto es lo importante: <strong>estás vendiendo sin un sistema atrás.</strong> Lo que hoy sostenés a pulso, un sistema lo sostiene solo.</>
               ) : (
@@ -645,7 +744,7 @@ function Reveal({ respuestas, nombre, contexto = {} }) {
             </p>
           </div>
 
-          <p style={{ ...parrafo, margin: "0 0 32px" }}>
+          <p style={{ ...parrafo, fontSize: "clamp(17.5px, 1.5vw, 20.5px)", margin: "0 0 32px" }}>
             Cuánto vale esa diferencia, en tu negocio y con tus números, es lo que mide un{" "}
             <strong style={{ color: LIMA }}>Revenue Reality Check</strong>.
           </p>
