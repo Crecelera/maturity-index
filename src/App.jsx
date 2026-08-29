@@ -132,29 +132,15 @@ const FORTALEZAS = {
 };
 
 /* Cruces: dos dimensiones flojas que en realidad son un solo problema. */
+/* Cruces: sólo los que sacan una conclusión que no está en ninguna caja por separado.
+   Si dos dimensiones flojas no producen una síntesis real, no se muestra nada. */
 const CRUCES = [
   { par: ["p2", "p5"],
-    equipo: "No controlás el flujo y tampoco lo medís. Por eso nunca vas a saber si el problema es que entran pocas oportunidades o que se caen las que entran.",
-    solo:   "No controlás el flujo y tampoco lo medís. Por eso nunca vas a saber si el problema es que entran pocas oportunidades o que se caen las que entran." },
-  { par: ["p1", "p2"],
-    equipo: "Prospectás sin tener claro a quién. Todo lo que generes arriba del funnel va a llegar sucio abajo, y el equipo va a trabajar el doble para cerrar la mitad.",
-    solo:   "Prospectás sin tener claro a quién. Todo lo que generes arriba del funnel va a llegar sucio abajo, y cada hora que ponés ahí es una hora que no recuperás." },
+    equipo: "No controlás el flujo y tampoco lo medís. Por eso nunca vas a saber si el problema es que entran pocas oportunidades o que se caen las que entran — y son dos problemas que se arreglan de maneras opuestas.",
+    solo:   "No controlás el flujo y tampoco lo medís. Por eso nunca vas a saber si el problema es que entran pocas oportunidades o que se caen las que entran — y son dos problemas que se arreglan de maneras opuestas." },
   { par: ["p3", "p5"],
-    equipo: "Sin proceso de seguimiento y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje.",
-    solo:   "Sin proceso de seguimiento y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje." },
-  { par: ["p3", "p4"],
-    equipo: "El proceso vive en tu cabeza y el equipo depende de vos. Cada persona que sumes va a copiar tu memoria, no tu método.",
-    solo:   "El proceso vive en tu cabeza y sos el único que lo ejecuta. No hay nada que puedas delegar todavía, porque nunca existió fuera tuyo." },
-  { par: ["p1", "p4"],
-    equipo: "Vos sos el que sabe a quién hay que venderle, y eso no está escrito. El equipo no puede aplicar un criterio que nunca salió de tu cabeza.",
-    solo:   "Vos sos el que sabe a quién hay que venderle. Mientras eso no esté escrito no es transferible: se va con vos a cada reunión." },
-];
-
-const CANCHAS = [
-  "BPO & contact center", "Construcción & inmobiliario", "Distribución & mayoristas",
-  "Educación & formación", "Industria & manufactura", "Logística & transporte",
-  "Maquinaria & concesionarios", "Marketing & agencias", "Retail & ecommerce",
-  "Salud", "Servicios profesionales", "Tecnología & software", "Otro",
+    equipo: "Sin seguimiento estructurado y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje. El año que viene vas a estar cometiendo exactamente los mismos errores, sin saber cuáles son.",
+    solo:   "Sin seguimiento estructurado y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje. El año que viene vas a estar cometiendo exactamente los mismos errores, sin saber cuáles son." },
 ];
 
 const TICKET_ALTO = ["USD 20.000 – 100.000", "Más de USD 100.000"];
