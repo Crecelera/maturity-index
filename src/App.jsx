@@ -143,6 +143,13 @@ const CRUCES = [
     solo:   "Sin seguimiento estructurado y sin medición, cada propuesta perdida se pierde dos veces: perdés la venta y perdés el aprendizaje. El año que viene vas a estar cometiendo exactamente los mismos errores, sin saber cuáles son." },
 ];
 
+const CANCHAS = [
+  "BPO & contact center", "Construcción & inmobiliario", "Distribución & mayoristas",
+  "Educación & formación", "Industria & manufactura", "Logística & transporte",
+  "Maquinaria & concesionarios", "Marketing & agencias", "Retail & ecommerce",
+  "Salud", "Servicios profesionales", "Tecnología & software", "Otro",
+];
+
 const TICKET_ALTO = ["USD 20.000 – 100.000", "Más de USD 100.000"];
 const VOLUMEN_BAJO = ["Menos de 10", "10 – 50"];
 
